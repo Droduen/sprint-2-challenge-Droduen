@@ -23,27 +23,99 @@
 
     // 👉 CHALLENGE 2
     function mineSweeper(grid, x, y) {
-      
+      function validNums(num){
+        if(num<=3 && num>=1){
+          return true
+        }
+        return false
+      }
+      if(validNums(x) && validNums(y)){
+        let i1 = y -1
+        let i2 = x -1
+        if(grid[i1][i2]=="🟥"){
+          return "🟥 💀"
+        }
+        if(grid[i1][i2]=="🟦"){
+          return "🟦 🥳"
+        }
+      } else{
+        return "invalid coordinates"
+      }
     }
 
     // 👉 CHALLENGE 3
     function booleanize(obj) {
+      for(keys in obj){
+        let length = keys.length
+        if(length>9){
+          return "shorten all prop names to 9 chars or less"
+        }
+        let val = obj[keys]
+        if(val==0){
+          obj[keys]= false
+        } else if (val==1){obj[keys] = true}
+        else if(val==null){
+          delete obj[keys]
+        }
+      }
+      return obj
 
     }
 
     // 👉 CHALLENGE 4
     function scrub(text, forbidden) {
-
+      function convert(string){
+        let length = string.length
+        let i= 0
+        let str = ""
+        while(i<length){
+          i++
+          str+="x"
+        }
+        return str
+      }
+      let words = text.split(" ")
+      for(index in words){
+        if(forbidden.includes(words[index])){
+          words[index] = convert(words[index])
+        }
+      }
+      return words.join(" ")
     }
 
     // 👉 CHALLENGE 5 (bonus, NOT graded)
     function normalizePhoneNumber(num) {
-
+      let string ="("
+      for(let i = 0; i < 3; i++){
+        string+=num[i]
+      }
+      string+=") "
+      for(let i = 3; i < 6; i++){
+        string+=num[i]
+      }
+      string+="-"
+      for(let i = 6; i < 10; i++){
+        string+=num[i]
+      }
+      return string 
     }
+
 
     // 👉 CHALLENGE 6 (bonus, NOT graded)
     function diceRolls() {
-
+      function roll(){
+            return Math.ceil(Math.random()*6)
+        }
+      let countSix = 0
+      let countTotal = 0
+      while(countSix < 3){
+        let num = roll()
+        if(num==6){
+            countSix++
+        }
+        countTotal++
+      }
+      return countTotal
     }
 
     // 🧪 DO NOT make any changes below this line ===================
